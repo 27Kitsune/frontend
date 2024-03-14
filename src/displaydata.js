@@ -27,6 +27,9 @@ function DisplayData() {
                     </li>
                 ))}
             </ul>
+            <div>
+                <h4>Total number of students: {data.length}</h4>
+            </div>
         </div>
     );
 }
