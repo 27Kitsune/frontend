@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function DisplayData() {
@@ -6,7 +7,7 @@ function DisplayData() {
 
     useEffect(() => {
         // Make an HTTP GET request to fetch data from your backend endpoint
-        axios.get("http://localhost:8081/student")
+        axios.get("http://localhost:8081/student/Display")
             .then(response => {
                 // Upon successful response, update the state with the fetched data
                 setData(response.data);
@@ -15,16 +16,21 @@ function DisplayData() {
                 console.error("Error fetching data:", error);
             });
     }, []); // Empty dependency array to execute the effect only once
-
+    /* Render each student's information */
     return (
         <div>
             <h2>Student List</h2>
             <ul>
                 {data.map(student => (
-                    <li key={student.student_id}>
-                        {/* Render each student's information */}
-                        {student.student_name} - {student.student_email}
+                    <div key={student.student_ID}>
+                        <li>
+                        ID: {student.student_ID} -- 
+                        Name: {student.student_name} -- 
+                        Email: {student.student_email}
                     </li>
+                    <Link to={`/student/UpdateData/${student.student_ID}`}>Update</Link> {"  "}
+                    <Link to="/Delete">Delete</Link>
+                    </div>
                 ))}
             </ul>
             <div>
